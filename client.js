@@ -9,8 +9,11 @@ $(document).ready(function(){
     { name: 'Kris', yearsOfExperience: 14 }
   ];
 
+  years(personArray);
+
   function years(array) {
     var totalYears = 0;
+    $('#employeeTable').empty();
     array.forEach(function(employee, i){
       totalYears += employee.yearsOfExperience;
       $('#employeeTable').append(
@@ -23,12 +26,13 @@ $(document).ready(function(){
     });
     return totalYears;
   }
-  // var years = function (array) {
-  //   (array.forEach(function(totalYears, i){
-  //     console.log(array.yearsOfExperience);
-  //     totalYears += array.yearsOfExperience;
-  //     console.log(totalYears);
-  // })
-  years(personArray);
+
+  $('#submit').on('click', function (){
+    var newName = $('#name').val();
+    var yearsHere = parseInt($('#yearsHere').val());
+    var newEmployeeObject = {name: newName, yearsOfExperience: yearsHere};
+    personArray.push(newEmployeeObject);
+    years(personArray);
+  });
 
 });
