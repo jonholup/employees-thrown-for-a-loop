@@ -2,37 +2,31 @@
 // . Each employee object will come in with a property called yearsOfExperience.
 //  Your function should return the total
 //  years of experience for all of the employees.
+var totalYears = 0;
+var personArray = [];
 $(document).ready(function(){
-  var personArray = [
-    { name: 'Tony', yearsOfExperience: 10 },
-    { name: 'Carla', yearsOfExperience: 4 },
-    { name: 'Kris', yearsOfExperience: 14 }
-  ];
-
-  years(personArray);
-
-  function years(array) {
-    var totalYears = 0;
+  $('form').on('submit', function (event){
+    event.preventDefault();
     $('#employeeTable').empty();
-    array.forEach(function(employee, i){
-      totalYears += employee.yearsOfExperience;
+    totalYears = 0;
+    var submissionArray = $(this).serializeArray();
+    var newEmployeeObject = {};
+    submissionArray.forEach(function(inputFieldObject){
+      newEmployeeObject[inputFieldObject.name] = inputFieldObject.value;
+    })
+
+
+    personArray.push(newEmployeeObject);
+    personArray.forEach(function(employee){
+      totalYears += parseInt(employee.yearsHere);
       $('#employeeTable').append(
         '<tr>' +
         '<td>' + employee.name + '</td>' +
-        '<td>' + employee.yearsOfExperience + '</td>' +
-        '</tr>'
-      );
+        '<td>' + employee.yearsHere + '</td>' +
+        '</tr>')
+      });
       $('#totalYears').text(totalYears);
+
     });
-    return totalYears;
-  }
 
-  $('#submit').on('click', function (){
-    var newName = $('#name').val();
-    var yearsHere = parseInt($('#yearsHere').val());
-    var newEmployeeObject = {name: newName, yearsOfExperience: yearsHere};
-    personArray.push(newEmployeeObject);
-    years(personArray);
   });
-
-});
