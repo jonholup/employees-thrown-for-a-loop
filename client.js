@@ -20,9 +20,9 @@ $(document).ready(function(){
         '<tr>' +
         '<td>' + employee.name + '</td>' +
         '<td>' + employee.yearsOfExperience + '</td>' +
-        '<td>' + totalYears + '</td>' +
         '</tr>'
       );
+      $('#totalYears').text(totalYears);
     });
     return totalYears;
   }
